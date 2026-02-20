@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkripsiTuntas - Jasa Bimbingan & Olah Data Skripsi Profesional</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons (untuk ikon yang bagus) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #2563eb;       /* Biru Akademik */
+            --primary-dark: #1e40af;
+            --secondary: #0f172a;     /* Dark Navy */
+            --accent: #f59e0b;        /* Kuning/Oranye untuk CTA */
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --success: #10b981;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', serif; /* Font elegan untuk judul utama */
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-accent:hover {
+            background-color: #d97706;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--bg-white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 16px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-main);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 80px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 32px;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .trust-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .trust-badge i {
+            color: var(--success);
+            font-size: 24px;
+        }
+
+        /* --- FEATURES / WHY US --- */
+        .features {
+            padding: 60px 0;
+            background: var(--bg-white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: #eff6ff;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        /* --- SERVICES --- */
+        .services {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .service-body {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-body h3 {
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+        }
+
+        .service-price {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* --- PAYMENT & PRICING LOGIC --- */
+        .payment-info {
+            background: var(--secondary);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .payment-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .payment-text h2 {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+        }
+
+        .payment-text ul {
+            margin-top: 30px;
+        }
+
+        .payment-text li {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .payment-text i {
+            color: var(--accent);
+            margin-top: 4px;
+        }
+
+        /* Calculator Card */
+        .calc-card {
+            background: white;
+            color: var(--text-main);
+            padding: 32px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-select, .form-range {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+        
+        .result-box {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 24px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .price-row.total {
+            border-top: 1px dashed #94a3b8;
+            padding-top: 12px;
+            margin-top: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+        
+        .price-row.dp {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* --- STEPS --- */
+        .steps {
+            padding: 80px 0;
+            background: var(--bg-white);
+        }
+
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            margin-bottom: 4px;
+        }
+
+        /* --- FAQ --- */
+        .faq {
+            padding: 80px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            margin-top: 12px;
+            color: var(--text-light);
+            display: none; /* JS will toggle this */
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--bg-white);
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero, .payment-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .nav-links {
+                display: none; /* Simple hiding for mobile, usually use JS toggle */
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .trust-badge {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -25px;
+                width: 80%;
+                justify-content: center;
+            }
+            
+            .step-item {
+                text-align: left;
+            }
+        }
+
+        /* --- TESTIMONIALS SECTION --- */
+.testimonials {
+    padding: 80px 0;
+    background-color: #f1f5f9; /* Latar belakang sedikit abu-abu agar kontras */
+}
+
+.testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.testi-card {
+    background: white;
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.testi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.testi-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.testi-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+    margin-right: 15px;
+    background-color: #e2e8f0;
+}
+
+.testi-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+    color: var(--secondary);
+}
+
+.testi-info span {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.testi-stars {
+    color: var(--accent); /* Warna bintang kuning */
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.testi-text {
+    color: var(--text-main);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="ph ph-graduation-cap"></i>
+                    SkripsiTuntas
+                </div>
+                <div class="mobile-menu-btn" onclick="toggleMenu()">
+                    <i class="ph ph-list"></i>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#hero">Beranda</a></li>
+                    <li><a href="#layanan">Layanan</a></li>
+                    <li><a href="#pembayaran">Harga & DP</a></li>
+                    <li><a href="#cara-order">Cara Order</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="https://wa.me/6281234567890" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Konsultasi</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero container">
+        <div class="hero-content">
+            <h1>Skripsi Berat? <br>Kami Ada Solusinya.</h1>
+            <p>Jasa bimbingan skripsi profesional, anti-plagiarisme, dan tepat waktu. Fokus pada revisi dan sidang, biar kami yang urus penulisan dan olah datanya.</p>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; md:justify-content: flex-start;">
+                <a href="#layanan" class="btn btn-primary">Lihat Paket</a>
+                <a href="https://wa.me/6281234567890" class="btn btn-outline">
+                    <i class="ph ph-whatsapp-logo"></i> Chat WA
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Placeholder image: Student studying -->
+            <img src="https://picsum.photos/seed/student1/600/400" alt="Mahasiswa">
+            <div class="trust-badge">
+                <i class="ph ph-shield-check"></i>
+                <div>
+                    <strong>Garansi Lulus</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-light);">Atau Revisi Sampai ACC</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Kenapa Memilih Kami?</h2>
+                <p>Kami bukan sekadar joki, kami adalah mitra akademik yang memahami aturan kampus dan standar kelulusan.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="ph ph-pencil-simple-line"></i></div>
+                    <h3>100% Original</h3>
+                    <p>Dikerjakan manual, bukan hasil copy-paste. Turnitin check tersedia untuk menjamin keaslian.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="ph ph-clock-countdown"></i></div>
+                    <h3>Tepat Waktu</h3>
+                    <p>Deadline adalah prioritas. Kami berkomitmen menyelesaikan sesuai timeline yang disepakati.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="ph ph-lock-key"></i></div>
+                    <h3>Privasi Terjaga</h3>
+                    <p>Data dan kerjasama kamu dirahasiakan. Tidak ada pihak ketiga yang mengetahui.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="layanan" class="services container">
+        <div class="section-header">
+            <h2>Pilihan Paket Layanan</h2>
+            <p>Sesuaikan dengan kebutuhan skripsimu saat ini.</p>
+        </div>
+        <div class="service-grid">
+            <!-- Paket 1 -->
+            <div class="service-card">
+                <img src="https://picsum.photos/seed/writing/400/250" alt="Judul & Proposal" class="service-img">
+                <div class="service-body">
+                    <h3>Paket Proposal (Bab 1-3)</h3>
+                    <p>Cocok untuk kamu yang baru mulai atau butuh revisi proposal agar dosen ACC.</p>
+                    <ul style="margin: 12px 0; font-size: 0.9rem; color: var(--text-light); padding-left: 20px;">
+                        <li>• Bab 1: Pendahuluan</li>
+                        <li>• Bab 2: Tinjauan Pustaka</li>
+                        <li>• Bab 3: Metodologi</li>
+                        <li>• Referensi (Mendeley/Zotero)</li>
+                    </ul>
+                    <div class="service-price">Mulai Rp 800.000</div>
+                </div>
+            </div>
+
+            <!-- Paket 2 -->
+            <div class="service-card">
+                <img src="https://picsum.photos/seed/analysis/400/250" alt="Olah Data" class="service-img">
+                <div class="service-body">
+                    <h3>Olah Data & Bab 4</h3>
+                    <p>Sudah punya data tapi bingung mengolahnya? Kami bantu analisis statistik dan penulisan hasil.</p>
+                    <ul style="margin: 12px 0; font-size: 0.9rem; color: var(--text-light); padding-left: 20px;">
+                        <li>• Analisis (SPSS/Python/Eviews)</li>
+                        <li>• Interpretasi Hasil</li>
+                        <li>• Bab 4: Pembahasan</li>
+                        <li>• Grafik & Tabel</li>
+                    </ul>
+                    <div class="service-price">Mulai Rp 1.200.000</div>
+                </div>
+            </div>
+
+            <!-- Paket 3 -->
+            <div class="service-card">
+                <img src="https://picsum.photos/seed/grad/400/250" alt="Full Skripsi" class="service-img">
+                <div class="service-body">
+                    <h3>Paket FULL (Bab 1-5)</h3>
+                    <p>Solusi tuntas dari nol sampai selesai, termasuk powerpoint persiapan sidang.</p>
+                    <ul style="margin: 12px 0; font-size: 0.9rem; color: var(--text-light); padding-left: 20px;">
+                        <li>• Bab 1 s/d 5 Lengkap</li>
+                        <li>• Olah Data</li>
+                        <li>• Abstrak (Ind/Ing)</li>
+                        <li>• PPT Sidang & Daftar Pustaka</li>
+                    </ul>
+                    <div class="service-price">Mulai Rp 2.500.000</div>
+                </div>
+            </div>
+        </div>
+
+            <!-- Testimonials Section -->
+    <section id="testimoni" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Apa Kata Mereka?</h2>
+                <p>Cerita sukses mahasiswa yang sudah dibantu lulus tepat waktu.</p>
+            </div>
+
+            <div class="testi-grid">
+                <!-- Testimoni 1 -->
+                <div class="testi-card">
+                    <div class="testi-header">
+                        <!-- Ganti src dengan foto asli nanti -->
+                        <img src="https://picsum.photos/seed/mahasiswa1/100/100" alt="Foto Mahasiswa" class="testi-img">
+                        <div class="testi-info">
+                            <h4>Rina Sulistya</h4>
+                            <span>Manajemen, Universitas Indonesia</span>
+                        </div>
+                    </div>
+                    <div class="testi-stars">
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="testi-text">
+                        "Awalnya ragu pakai joki, tapi SkripsiTuntas bener-bener ngebantu. Dosen pembimbing saya susah banget ACC-nya, tapi tim di sini sabar bantu revisi sampai 7 kali. Sampai akhirnya lulus dengan IPK bagus!"
+                    </p>
+                </div>
+
+                <!-- Testimoni 2 -->
+                <div class="testi-card">
+                    <div class="testi-header">
+                        <img src="https://picsum.photos/seed/mahasiswa2/100/100" alt="Foto Mahasiswa" class="testi-img">
+                        <div class="testi-info">
+                            <h4>Budi Santoso</h4>
+                            <span>Teknik Informatika, ITB</span>
+                        </div>
+                    </div>
+                    <div class="testi-stars">
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                    </div>
+                    <p class="testi-text">
+                        "Saya butuh banget bantuan olah data Python. Hasilnya rapi banget, penjelasan bab 4 detail jadi pas sidang penguji bertanya saya bisa jawab dengan lancar. Worth it banget harganya!"
+                    </p>
+                </div>
+
+                <!-- Testimoni 3 -->
+                <div class="testi-card">
+                    <div class="testi-header">
+                        <img src="https://picsum.photos/seed/mahasiswa3/100/100" alt="Foto Mahasiswa" class="testi-img">
+                        <div class="testi-info">
+                            <h4>Siti Aminah</h4>
+                            <span>Hukum, UII</span>
+                        </div>
+                    </div>
+                    <div class="testi-stars">
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph ph-star"></i> <!-- Bintang setengah/kosong -->
+                    </div>
+                    <p class="testi-text">
+                        "Sistem DP 50% ini sangat membantu finansial saya. Pengerjaan cepat, cuma 3 minggu full skripsi jadi. Sedikit telat di revisi terakhir, tapi overall sangat puas. Terima kasih!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Testimonials -->
+    </section>
+
+    <!-- Payment & Calculator Section -->
+    <section id="pembayaran" class="payment-info">
+        <div class="container payment-container">
+            <div class="payment-text">
+                <h2>Sistem Pembayaran Aman & Transparan</h2>
+                <p>Kami mengutamakan rasa aman bagi mahasiswa. Sistem pembayaran kami dirancang untuk membangun kepercayaan.</p>
+                
+                <ul>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <div>
+                            <strong>DP 50% di Awal</strong>
+                            <div>Untuk pengerjaan Bab 1-3 atau pengerjaan tahap pertama.</div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <div>
+                            <strong>Proses Bertahap</strong>
+                            <div>Kamu bisa kontrol progress pengerjaan setiap hari.</div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <div>
+                            <strong>Pelunasan 50% di Akhir</strong>
+                            <div>Dilakukan setelah revisi selesai / ACC mentor / file lengkap diterima.</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Price Calculator -->
+            <div class="calc-card">
+                <h3 style="margin-bottom: 20px;">Hitung Estimasi Biaya</h3>
+                
+                <div class="form-group">
+                    <label>Jenis Layanan</label>
+                    <select id="serviceType" class="form-select" onchange="calculatePrice()">
+                        <option value="800000">Paket Proposal (Bab 1-3)</option>
+                        <option value="1200000">Olah Data & Bab 4</option>
+                        <option value="2500000" selected>Paket Full Skripsi (Bab 1-5)</option>
+                        <option value="500000">Per Bab / Revisi</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tingkat Kesulitan</label>
+                    <select id="difficulty" class="form-select" onchange="calculatePrice()">
+                        <option value="1">Normal (Statistik Deskriptif)</option>
+                        <option value="1.2">Sedang (Uji Regresi/Inferensia)</option>
+                        <option value="1.4">Sulit (Kuantitatif Komplek/SEM)</option>
+                        <option value="1.5">Sangat Sulit (Coding/Pemrograman)</option>
+                    </select>
+                </div>
+
+                <div class="result-box">
+                    <div class="price-row">
+                        <span>Harga Dasar:</span>
+                        <span id="basePriceDisplay">Rp 0</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Total Biaya:</span>
+                        <span id="totalPriceDisplay">Rp 0</span>
+                    </div>
+                    <div class="price-row dp">
+                        <span>DP 50% (Bayar Sekarang):</span>
+                        <span id="dpPriceDisplay">Rp 0</span>
+                    </div>
+                    <div class="price-row total" style="border:none; margin-top:5px; font-size:0.85rem; color: var(--text-light);">
+                        <span>Sisa Pelunasan:</span>
+                        <span id="remainingPriceDisplay">Rp 0</span>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/6281234567890?text=Halo%20kak,%20saya%20mau%20tanya%20pakar%20Full%20Skripsi%20dengan%20estimasi%20DP..." class="btn btn-accent" style="width: 100%; justify-content: center; margin-top: 20px;">
+                    Pesan Sekarang (Bayar DP)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Order -->
+    <section id="cara-order" class="steps">
+        <div class="container">
+            <div class="section-header">
+                <h2>Cara Pemesanan</h2>
+                <p>Proses mudah tanpa ribet.</p>
+            </div>
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Konsultasi & Deal</h4>
+                        <p>Hubungi kami via WA, diskusikan judul dan metode. Tentukan deadline dan harga final.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Bayar DP 50%</h4>
+                        <p>Lakukan pembayaran uang muka sesuai kesepakatan sebagai tanda jadi pengerjaan dimulai.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Pengerjaan & Revisi</h4>
+                        <p>Kami kerjakan bertahap. Kami kirim draft, kamu cek dan minta revisi ke dosen pembimbing.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Pelunasan & File Lengkap</h4>
+                        <p>Setelah revisi selesai / ACC, lakukan pelunasan 50%. Kami kirim file lengkap (Word, PDF, PPT).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="container faq">
+        <div class="section-header">
+            <h2>Pertanyaan Umum (FAQ)</h2>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                Apakah bisa bayar DP dulu?
+                <i class="ph ph-caret-down"></i>
+            </div>
+            <div class="faq-answer">
+                Tentu bisa! Aturan utama kami adalah DP 50% di awal untuk memulai pengerjaan, dan 50% sisanya dibayar setelah skripsi selesai/di-ACC dosen. Ini untuk keamanan dan kenyamanan bersama.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                Berapa lama proses pengerjaan?
+                <i class="ph ph-caret-down"></i>
+            </div>
+            <div class="faq-answer">
+                Tergantung paket dan deadline. Normalnya Bab 1-3 memakan waktu 3-7 hari, Full skripsi 2-4 minggu. Kami juga melayani paket kilat (Express) dengan biaya tambahan.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                Bagaimana dengan revisi dari dosen?
+                <i class="ph ph-caret-down"></i>
+            </div>
+            <div class="faq-answer">
+                Revisi adalah tanggung jawab kami selama masih dalam koridor metode yang disepakati di awal. Kami akan bantu revisi sampai dosen pembimbing memberikan tanda tangan ACC.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3 style="color: var(--primary); margin-bottom: 16px;">SkripsiTuntas</h3>
+            <p>Mitra terbaik mahasiswa Indonesia untuk menyelesaikan skripsi tepat waktu.</p>
+            <div style="margin: 24px 0; display: flex; gap: 16px; justify-content: center;">
+                <a href="#"><i class="ph ph-instagram-logo" style="font-size: 24px;"></i></a>
+                <a href="#"><i class="ph ph-whatsapp-logo" style="font-size: 24px;"></i></a>
+                <a href="#"><i class="ph ph-facebook-logo" style="font-size: 24px;"></i></a>
+            </div>
+            <p>&copy; 2023 SkripsiTuntas. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 1. Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // 2. FAQ Toggle
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.classList.replace('ph-caret-up', 'ph-caret-down');
+            } else {
+                // Close other open FAQs (optional)
+                document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.ph-caret-up').forEach(el => el.classList.replace('ph-caret-up', 'ph-caret-down'));
+
+                answer.classList.add('active');
+                icon.classList.replace('ph-caret-down', 'ph-caret-up');
+            }
+        }
+
+        // 3. Price Calculator Logic
+        function calculatePrice() {
+            // Get values
+            const basePrice = parseInt(document.getElementById('serviceType').value);
+            const difficultyMultiplier = parseFloat(document.getElementById('difficulty').value);
+            
+            // Calculate
+            const total = basePrice * difficultyMultiplier;
+            const dp = total * 0.5; // 50% DP
+            const remaining = total - dp;
+
+            // Format Currency (Rupiah)
+            const formatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            });
+
+            // Update DOM
+            document.getElementById('basePriceDisplay').textContent = formatter.format(basePrice);
+            document.getElementById('totalPriceDisplay').textContent = formatter.format(total);
+            document.getElementById('dpPriceDisplay').textContent = formatter.format(dp);
+            document.getElementById('remainingPriceDisplay').textContent = formatter.format(remaining);
+        }
+
+        // Initialize calculator on load
+        document.addEventListener('DOMContentLoaded', calculatePrice);
+    </script>
+</body>
+</html>
